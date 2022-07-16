@@ -20,7 +20,7 @@ function playRound(computerSelection, playerSelection) {
     return "Player wins!";
   } else if (computerSelection === "SCISSORS" && playerSelection === "PAPER") {
     return "Computer wins!";
-  } else if (playerSelection === "" || null || undefined) {
+  } else if (playerSelection === "") {
     return "Please enter a valid selection";
   }
 }
@@ -32,17 +32,20 @@ function game() {
   //   loop that runs the game five times per round
   for (let i = 0; i < 5; i++) {
     let playerSelections = prompt("ROCK, PAPER, or SCISSORS?");
-
-    let playerSelection = playerSelections.toUpperCase();
+    let playerSelection = playerSelections;
     //check for option validity
     if (
-      playerSelection !== "ROCK" &&
-      playerSelection !== "PAPER" &&
-      playerSelection !== "SCISSORS"
+      playerSelection !== "ROCK" ||
+      playerSelection !== "PAPER" ||
+      playerSelection !== "SCISSORS" ||
+      playerSelection === undefined ||
+      playerSelection === null ||
+      playerSelection === ""
     ) {
       alert("Please enter a valid selection");
       i--;
     } else {
+      let playerSelection = playerSelections.toUpperCase();
       let computerSelection = computerPlay();
       let roundResult = playRound(computerSelection, playerSelection);
       if (roundResult.includes("Player wins!")) {
