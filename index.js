@@ -32,15 +32,26 @@ function game() {
   //   loop that runs the game five times per round
   for (let i = 0; i < 5; i++) {
     let playerSelections = prompt("ROCK, PAPER, or SCISSORS?");
+
     let playerSelection = playerSelections.toUpperCase();
-    let computerSelection = computerPlay();
-    let roundResult = playRound(computerSelection, playerSelection);
-    if (roundResult.includes("Player wins!")) {
-      playerScore++;
-    } else if (roundResult.includes("Computer wins!")) {
-      computerScore++;
+    //check for option validity
+    if (
+      playerSelection !== "ROCK" &&
+      playerSelection !== "PAPER" &&
+      playerSelection !== "SCISSORS"
+    ) {
+      alert("Please enter a valid selection");
+      i--;
+    } else {
+      let computerSelection = computerPlay();
+      let roundResult = playRound(computerSelection, playerSelection);
+      if (roundResult.includes("Player wins!")) {
+        playerScore++;
+      } else if (roundResult.includes("Computer wins!")) {
+        computerScore++;
+      }
+      console.log(roundResult);
     }
-    console.log(roundResult);
   }
   if (playerScore > computerScore) {
     return `Player wins the game with ${playerScore} points! to Computer's ${computerScore} points`;
@@ -53,3 +64,6 @@ function game() {
 
 console.log(game());
 console.log("Game Over");
+
+prompt("Press any key to continue");
+console.log(game());
